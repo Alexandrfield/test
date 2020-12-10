@@ -1,74 +1,71 @@
 #include "AbstractTriangle.h"
+#include "ObjectIsCanNotCreated.h"
 
 
+    AbstractTriangle::AbstractTriangle(const Point2D &vertexA, const Point2D &vertexB, const Point2D &vertexC)
+    {
+        std::cout<<"triang 1"<<std::endl;
+        
+        double lengthAB = vertexA.DistanceToPoint(vertexB);
+        double lengthBC = vertexB.DistanceToPoint(vertexC);
+        double lengthAC = vertexA.DistanceToPoint(vertexC);
 
-    double AbstractTriangle::GetLengthSquare(const Point2D &firstPoint,const Point2D &secondPoint) const{ 
+        std::cout<<"triang 2"<<std::endl;
 
-        double lengthX = firstPoint.GetX() - secondPoint.GetX();
-        double lengthY = firstPoint.GetY() - secondPoint.GetY();
+        if( (lengthAB + lengthBC <= lengthAC) ||
+            (lengthAC + lengthBC <= lengthAB) ||
+            (lengthAB + lengthAC <= lengthBC) ){
 
-        double squareLength = (lengthX * lengthX) + (lengthY * lengthY);
+            throw ObjectIsCanNotCreated();
+        }
+std::cout<<"triang 3"<<std::endl;
+        triangleABC.reserve(3);
 
-        return squareLength;
-    }
-
-    double AbstractTriangle::GetLength(const Point2D &firstPoint,const Point2D &secondPoint) const{
-
-        double squareLength = GetLengthSquare(firstPoint,secondPoint);
-
-        return std::sqrt(squareLength);
-    }
-
-
-
-    AbstractTriangle::AbstractTriangle(const Point2D &vertexA, const Point2D &vertexB, const Point2D &vertexC){
-
-        triangleABC[0] = vertexA;
-        triangleABC[1] = vertexB;
-        triangleABC[2] = vertexC;
+        triangleABC.push_back(vertexA);
+        triangleABC.push_back(vertexB);
+        triangleABC.push_back(vertexC);
+        std::cout<<"triang 4"<<std::endl;
         
     }
 
+    double AbstractTriangle::GetLengthSquareAB() const 
+    {
 
-    void AbstractTriangle::SetVertex(const Point2D &vertexA, const Point2D &vertexB, const Point2D &vertexC){
- 
-        triangleABC[0] = vertexA;
-        triangleABC[1] = vertexB;
-        triangleABC[2] = vertexC;
-   }
-
-    double AbstractTriangle::GetLengthSquareAB() const{
-
-        return GetLengthSquare(triangleABC[0], triangleABC[1]);
+        return triangleABC[0].SquareOfDistanceToPoint(triangleABC[1]);
     }
 
-    double AbstractTriangle::GetLengthSquareBC() const{
+    double AbstractTriangle::GetLengthSquareBC() const 
+    {
 
-        return GetLengthSquare(triangleABC[1],triangleABC[2]);
+        return triangleABC[1].SquareOfDistanceToPoint(triangleABC[2]);
     }
  
-    double AbstractTriangle::GetLengthSquareAC() const{
+    double AbstractTriangle::GetLengthSquareAC() const 
+    {
 
-       return AbstractTriangle::GetLengthSquare(triangleABC[0],triangleABC[2]);
+      return triangleABC[0].SquareOfDistanceToPoint(triangleABC[2]);
     }
 
-    double AbstractTriangle::GetLengthAB() const{
+    double AbstractTriangle::GetLengthAB() const 
+    {
 
-        return GetLength(triangleABC[0], triangleABC[1]);
+        return triangleABC[0].DistanceToPoint(triangleABC[1]);
     }
 
-    double AbstractTriangle::GetLengthBC() const{
+    double AbstractTriangle::GetLengthBC() const 
+    {
 
-        return GetLength(triangleABC[1],triangleABC[2]);
+        return triangleABC[1].DistanceToPoint(triangleABC[2]);
     }
     
 
-    double AbstractTriangle::GetLengthAC() const{
+    double AbstractTriangle::GetLengthAC() const 
+    {
 
-       return GetLength(triangleABC[0],triangleABC[2]);
+        return triangleABC[0].DistanceToPoint(triangleABC[2]);
     }
     
 
-  //  std::string AbstractTriangle::GetMessage(){ };
+    //std::string AbstractTriangle::GetMessage(){ };
 
    

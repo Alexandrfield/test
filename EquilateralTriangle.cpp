@@ -1,26 +1,22 @@
 #include "EquilateralTriangle.h"
 
-EquilateralTriangle::EquilateralTriangle(const Point2D &vertexA, const Point2D &vertexB, const Point2D &vertexC): AbstractTriangle(vertexA, vertexB, vertexC) {
+EquilateralTriangle::EquilateralTriangle(const Point2D &vertexA, const Point2D &vertexB, const Point2D &vertexC): AbstractTriangle(vertexA, vertexB, vertexC) 
+{
 
-    double lengthAB = GetLengthAB();
-    double lengthBC = GetLengthBC();
-    double lengthAC = GetLengthAC();
+    double SquareLengthAB = GetLengthSquareAB();
+    double SquareLengthBC = GetLengthSquareBC();
+    double SquareLengthAC = GetLengthSquareAC();
 
-    if( lengthAB == 0 ){
-         
-        throw ObjectIsCanNotCreated();
 
-        }
-
-    if( (lengthAC != lengthAB) ||  (lengthBC != lengthAC) ){
+    if( (!isEqual(SquareLengthAC, SquareLengthAB)) || (!isEqual(SquareLengthBC, SquareLengthAC)) ){
 
         throw ObjectIsCanNotCreated();
 
-        }
     }
+}
 
-    std::string EquilateralTriangle::GetMessage(){
+TriangleTipe EquilateralTriangle::GetTipe()
+{
 
-        return std::string(" quilateral Triangle\n");
-
-    };
+    return TriangleTipe::TRINAGLE_TIPE_EQUILATERAL;
+}

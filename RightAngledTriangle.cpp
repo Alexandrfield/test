@@ -1,26 +1,23 @@
 #include "RightAngledTriangle.h"
 
-RightAngledTriangle::RightAngledTriangle(const Point2D &vertexA, const Point2D &vertexB, const Point2D &vertexC): AbstractTriangle(vertexA, vertexB, vertexC){
-
-
-    double lengthAB = GetLengthSquareAB();
-    double lengthBC = GetLengthSquareBC();
-    double lengthAC = GetLengthSquareAC();
+RightAngledTriangle::RightAngledTriangle(const Point2D &vertexA, const Point2D &vertexB, const Point2D &vertexC): AbstractTriangle(vertexA, vertexB, vertexC)
+{
+    double SquareLengthAB = GetLengthSquareAB();
+    double SquareLengthBC = GetLengthSquareBC();
+    double SquareLengthAC = GetLengthSquareAC();
         
-    if( lengthAB == 0 || lengthBC == 0 || lengthAC == 0 ){
+    // test ightAngledTriangle:
+    if( !isEqual( SquareLengthAB + SquareLengthBC, SquareLengthAC ) &&  
+        !isEqual( SquareLengthAB + SquareLengthAC, SquareLengthBC ) &&  
+        !isEqual( SquareLengthAC + SquareLengthBC, SquareLengthAB ) ){
 
         throw ObjectIsCanNotCreated();
     }
 
-    if( ( lengthAB + lengthBC != lengthAC ) &&  
-        ( lengthAB + lengthAC != lengthBC ) &&  
-        ( lengthAC + lengthBC != lengthAB ) ){
-
-        throw ObjectIsCanNotCreated();
-    }
 }
 
-std::string RightAngledTriangle::GetMessage(){
+TriangleTipe RightAngledTriangle::GetTipe()
+{
 
-    return std::string(" right  Triangle\n");
-};
+    return TriangleTipe::TRINAGLE_TIPE_RIGHT_ANGLED;
+}

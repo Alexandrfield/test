@@ -1,8 +1,11 @@
 all: test
 
-test: main.o Point2D.o AbstractTriangle.o ObjectIsCanNotCreated.o ArbitraryTriangle.o EmptyTriangle.o EquilateralTriangle.o IsoscelesAndRightAngledTriangle.o IsoscelesTriangle.o RightAngledTriangle.o BilderTriangle.o
-	g++ main.o Point2D.o AbstractTriangle.o ObjectIsCanNotCreated.o ArbitraryTriangle.o EmptyTriangle.o EquilateralTriangle.o IsoscelesAndRightAngledTriangle.o IsoscelesTriangle.o RightAngledTriangle.o BilderTriangle.o -o test
+test: common_function.o main.o Point2D.o AbstractTriangle.o ObjectIsCanNotCreated.o ArbitraryTriangle.o common_function.o EquilateralTriangle.o IsoscelesAndRightAngledTriangle.o IsoscelesTriangle.o RightAngledTriangle.o TriangleBilder.o
+	g++ common_function.o main.o Point2D.o AbstractTriangle.o ObjectIsCanNotCreated.o  ArbitraryTriangle.o  EquilateralTriangle.o IsoscelesAndRightAngledTriangle.o IsoscelesTriangle.o RightAngledTriangle.o TriangleBilder.o -o test
 
+common_function.o: common_function.cpp
+	g++ -c common_function.cpp
+	
 main.o: main.cpp
 	g++ -c main.cpp
 
@@ -17,9 +20,6 @@ ObjectIsCanNotCreated.o: ObjectIsCanNotCreated.cpp
 	
 ArbitraryTriangle.o: ArbitraryTriangle.cpp
 	g++ -c ArbitraryTriangle.cpp
-
-EmptyTriangle.o: EmptyTriangle.cpp
-	g++ -c EmptyTriangle.cpp
 	
 EquilateralTriangle.o: EquilateralTriangle.cpp
 	g++ -c EquilateralTriangle.cpp
@@ -33,8 +33,8 @@ IsoscelesTriangle.o: IsoscelesTriangle.cpp
 RightAngledTriangle.o: RightAngledTriangle.cpp
 	g++ -c RightAngledTriangle.cpp
 	
-BilderTriangle.o: BilderTriangle.cpp
-	g++ -c BilderTriangle.cpp
+TriangleBilder.o: TriangleBilder.cpp
+	g++ -c TriangleBilder.cpp
 	
 clean:
 	rm -rf *.o test

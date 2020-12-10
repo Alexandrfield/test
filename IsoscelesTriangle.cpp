@@ -1,32 +1,23 @@
  #include "IsoscelesTriangle.h"
 
- IsoscelesTriangle::IsoscelesTriangle(const Point2D &vertexA, const Point2D &vertexB, const Point2D &vertexC): AbstractTriangle(vertexA, vertexB, vertexC) {
+ IsoscelesTriangle::IsoscelesTriangle(const Point2D &vertexA, const Point2D &vertexB, const Point2D &vertexC): AbstractTriangle(vertexA, vertexB, vertexC) 
+ {
 
+    double SquareLengthAB = GetLengthSquareAB();
+    double SquareLengthBC = GetLengthSquareBC();
+    double SquareLengthAC = GetLengthSquareAC();
 
-    double lengthAB = GetLengthAB();
-    double lengthBC = GetLengthBC();
-    double lengthAC = GetLengthAC();
-
-
-
-    if( (lengthAB + lengthBC == lengthAC) ||
-        (lengthAC + lengthBC == lengthAB) ||
-        (lengthAB + lengthAC == lengthBC) ){
-
-        throw ObjectIsCanNotCreated();
-
-        }
-
-    if( (lengthAC != lengthAB) &&  
-        (lengthBC != lengthAB) && 
-        (lengthBC != lengthAC) ){
+    // test Isosceles:
+    if( !isEqual(SquareLengthAC, SquareLengthAB) &&  
+        !isEqual(SquareLengthBC, SquareLengthAB) && 
+        !isEqual(SquareLengthBC, SquareLengthAC) ){
 
         throw ObjectIsCanNotCreated();
-
-        }
+    }
 }
 
-std::string IsoscelesTriangle::GetMessage(){
+TriangleTipe IsoscelesTriangle::GetTipe()
+{
 
-    return std::string(" isosceles  Triangle\n");
-};
+    return TriangleTipe::TRINAGLE_TIPE_ISOSCELES;
+}
