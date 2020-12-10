@@ -1,26 +1,17 @@
 #ifndef TRIAGLE_H_ 
 #define TRIAGLE_H_ 
 
-#include "common_include.h"
+#include "stdfx.h"
 #include "Point2D.h"
+#include "enums.h"
 
 class AbstractTriangle
 {
-    Point2D triangleABC[3];
-
-    double GetLengthSquare(const Point2D &firstPoint,const Point2D &secondPoint) const;
-    double GetLength(const Point2D &firstPoint,const Point2D &secondPoint) const;
+    std::vector<Point2D> triangleABC;
 
     public:
-AbstractTriangle()
-{
-    triangleABC[0]=Point2D();
-        triangleABC[1]=Point2D();
-            triangleABC[0]=Point2D();
-}
-    AbstractTriangle(const Point2D &vertexA, const Point2D &vertexB, const Point2D &vertexC);
 
-    void SetVertex(const Point2D &vertexA, const Point2D &vertexB, const Point2D &vertexC);
+    AbstractTriangle(const Point2D &vertexA, const Point2D &vertexB, const Point2D &vertexC);
 
     double GetLengthSquareAB() const;
 
@@ -34,9 +25,9 @@ AbstractTriangle()
     
     double GetLengthAC() const;
 
-    virtual std::string GetMessage() = 0;
+    virtual TriangleTipe GetTipe() = 0;
 
-   
+
 };
 
 

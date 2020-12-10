@@ -1,20 +1,26 @@
 #ifndef POINT2D_H_ 
 #define POINT2D_H_ 
 
- #include "common_include.h"
+#include "stdfx.h"
+
 
 class Point2D
 {
     double xCoordinate_;
     double yCoordinate_;
 
-    public:
+public:
 
     Point2D(double x, double y);
 
-    double GetX() const;
+    Point2D(const Point2D &rhs);
 
+    double GetX() const;
     double GetY() const;
+
+    double SquareOfDistanceToPoint(const Point2D &point) const;
+    double DistanceToPoint(const Point2D &point) const;
+
 
 };
 

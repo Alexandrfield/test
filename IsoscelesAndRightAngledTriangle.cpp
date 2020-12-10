@@ -1,34 +1,32 @@
 #include "IsoscelesAndRightAngledTriangle.h"
 
-IsoscelesAndRightAngledTriangle::IsoscelesAndRightAngledTriangle(const Point2D &vertexA, const Point2D &vertexB, const Point2D &vertexC): AbstractTriangle(vertexA, vertexB, vertexC) {
+IsoscelesAndRightAngledTriangle::IsoscelesAndRightAngledTriangle(const Point2D &vertexA, const Point2D &vertexB, const Point2D &vertexC): 
+    AbstractTriangle(vertexA, vertexB, vertexC) 
+{
 
-
-    double lengthAB = GetLengthSquareAB();
-    double lengthBC = GetLengthSquareBC();
-    double lengthAC = GetLengthSquareAC();
+    double SquareLengthAB = GetLengthSquareAB();
+    double SquareLengthBC = GetLengthSquareBC();
+    double SquareLengthAC = GetLengthSquareAC();
         
-    if( lengthAB == 0 || lengthBC == 0 || lengthAC == 0 ){
+    // test ightAngledTriangle:
+    if( !isEqual( SquareLengthAB + SquareLengthBC, SquareLengthAC ) &&  
+        !isEqual( SquareLengthAB + SquareLengthAC, SquareLengthBC ) &&  
+        !isEqual( SquareLengthAC + SquareLengthBC, SquareLengthAB ) ){
 
         throw ObjectIsCanNotCreated();
     }
 
-    if( ( lengthAB + lengthBC != lengthAC ) &&  
-        ( lengthAB + lengthAC != lengthBC ) &&  
-        ( lengthAC + lengthBC != lengthAB ) ){
-
-        throw ObjectIsCanNotCreated();
-    }
-
-    if( (lengthAC != lengthAB) &&  
-        (lengthBC != lengthAB) && 
-        (lengthBC != lengthAC) ){
+    // test Isosceles:
+    if( !isEqual(SquareLengthAC, SquareLengthAB) &&  
+        !isEqual(SquareLengthBC, SquareLengthAB) && 
+        !isEqual(SquareLengthBC, SquareLengthAC) ){
 
         throw ObjectIsCanNotCreated();
     }
 }
 
-std::string IsoscelesAndRightAngledTriangle::GetMessage(){
+TriangleTipe IsoscelesAndRightAngledTriangle::GetTipe()
+{
 
-    return std::string(" isosceles and right-angled  Triangle\n");
-
+    return TriangleTipe::TRINAGLE_TIPE_ISOSCELES_RIGHT_ANGLED;
 }
